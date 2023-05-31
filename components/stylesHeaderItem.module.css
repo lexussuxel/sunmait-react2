@@ -1,0 +1,79 @@
+.wrapper_text {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.headertext::after {
+  content: "^";
+  margin: auto 0;
+  margin-left: 5px;
+  transform: rotate(180deg);
+}
+.headertext:hover {
+  color: rgb(46, 165, 3);
+}
+.headertext {
+  font-size: 2rem;
+  font-weight: 600;
+  border-bottom: 2px solid white;
+  cursor: pointer;
+}
+.headertext:hover ~ div {
+  color: #98afae;
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+}
+
+@media (min-width: 1000px) {
+  .wrapper_text {
+    display: flex;
+    color: black;
+  }
+  .wrapper_text:hover > .dropdown {
+    display: flex;
+  }
+  .headertext {
+    font-size: inherit;
+    font-weight: 600;
+    border: none;
+  }
+
+  .headertext:hover {
+    color: black;
+  }
+  .headertext:hover ~ div {
+    color: black;
+  }
+  .dropdown {
+    position: absolute;
+    top: 80%;
+    background-color: white;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 15px;
+    row-gap: 10px;
+    box-shadow: 0 5px 30px 0 rgba(108, 135, 135, 0.5);
+  }
+  .dropdown:hover {
+    display: flex;
+  }
+
+  .dropdown > p {
+    margin: 0;
+    cursor: pointer;
+  }
+  .dropdown > p:hover {
+    margin: 0;
+    color: rgb(46, 165, 3);
+  }
+}
+@media (max-width: 1000px) {
+  .open {
+    display: flex;
+  }
+}
