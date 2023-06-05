@@ -21,8 +21,18 @@ svg {
 }
 
 input {
-  margin: 10px auto;
+  border: 1px solid rgb(46, 165, 3);
+  margin-left: 10px;
+  padding: 5px;
   border-radius: 5px;
+}
+input:focus-visible{
+  border-color:rgb(23, 54, 9);
+  outline: none;
+}
+
+input.search{
+  margin: 10px auto;
 }
 
 .items-wrapper {
@@ -78,4 +88,29 @@ input {
 .content span {
   font-size: 24px;
   max-width: 960px;
+}
+
+.login{
+  row-gap: 20px;
+}
+
+.login button{
+  padding: 10px;
+  color: rgb(46, 165, 3);
+  background-color: rgb(245, 255, 240);
+  border: 1px rgb(46, 165, 3) solid;
+  border-radius: 5px;
+  cursor: pointer;
+  width: max-content;
+}
+
+.login button:hover{
+  color:rgb(53, 112, 28);
+  background-color: rgb(227, 247, 218);
+  border-color:rgb(53, 112, 28);
+}
+
+.warning{
+  font-size: 0.9rem;
+  color: rgb(200, 9, 9);
 }

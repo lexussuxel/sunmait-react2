@@ -32,6 +32,7 @@ const Index = () => {
           type="text"
           placeholder="search"
           value={search}
+          className="search"
           onInput={(e) => {
             inputHandler(e);
           }}

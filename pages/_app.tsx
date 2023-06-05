@@ -1,6 +1,7 @@
+import { wrapper } from "../store/store";
 import "../styles/global.css";
 
-export default function MyApp({
+ function MyApp({
   Component,
   pageProps,
 }: {
@@ -9,3 +10,4 @@ export default function MyApp({
 }) {
   return <Component {...pageProps} />;
 }
+export default wrapper.withRedux(MyApp)
