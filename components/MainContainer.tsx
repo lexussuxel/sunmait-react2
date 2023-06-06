@@ -10,22 +10,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store/store";
 import Link from "next/link";
 import { LogOut } from "../store/authSlice";
-import Router  from "next/router";
+import Router from "next/router";
 
 const MainWrapper = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarItemOpen, setSidebarItemOpen] = useState("");
-  const loggedIn = useSelector((state:AppState)=> state.auth.authState)
+  const loggedIn = useSelector((state: AppState) => state.auth.authState);
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(!loggedIn){
-      Router.push('/login')
+  useEffect(() => {
+    if (!loggedIn) {
+      Router.push("/login");
     }
-  }, [loggedIn])
+  }, [loggedIn]);
   return (
     <>
       <div className={styles.header + " base_padding"}>
-        <Logo/>
+        <Logo />
         <div
           className={`${styles.content_header} ${
             sidebarOpen ? "" : styles.none
@@ -40,11 +40,7 @@ const MainWrapper = ({ children }: { children: React.ReactNode }) => {
               setOpen={setSidebarItemOpen}
             />
           ))}
-          {loggedIn?
-          <div onClick={()=>dispatch(LogOut({}))}>Log out</div>
-          :
-          null
-        } 
+          {loggedIn && <div onClick={() => dispatch(LogOut({}))}>Log out</div>}
           <div
             onClick={() => {
               setSidebarOpen(false);

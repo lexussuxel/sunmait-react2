@@ -12,10 +12,10 @@ export interface ICard {
   text: string;
 }
 
-export const LOGIN_MOCK ={
+export const LOGIN_MOCK = {
   username: "admin",
-  password: "1234"
-}
+  password: "1234",
+};
 
 export const CARDS = [
   {

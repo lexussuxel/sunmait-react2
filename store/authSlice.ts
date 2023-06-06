@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { LOGIN_MOCK } from "../utils/constants";
 
-
 export interface AuthState {
   authState: boolean;
 }
@@ -16,14 +15,14 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     LogIn(state, action) {
-      const {username, password} = action.payload;
-      if (username == LOGIN_MOCK.username && password == LOGIN_MOCK.password){
-        state.authState = true
+      const { username, password } = action.payload;
+      if (username == LOGIN_MOCK.username && password == LOGIN_MOCK.password) {
+        state.authState = true;
       }
     },
-    LogOut(state, action){
-        state.authState = false;
-    }
+    LogOut(state, action) {
+      state.authState = false;
+    },
   },
 
   extraReducers: {
