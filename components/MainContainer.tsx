@@ -1,19 +1,31 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import burgerIcon from "./assets/burger.png";
 import closeIcon from "./assets/close.png";
 import styles from "./stylesContainer.module.css";
 import { HEADER_ITEMS } from "../utils/constants";
 import HeaderItem from "./HeaderItem";
 import Logo from "./Logo";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../store/store";
+import Link from "next/link";
+import { LogOut } from "../store/authSlice";
+import Router from "next/router";
 
 const MainWrapper = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarItemOpen, setSidebarItemOpen] = useState("");
+  const loggedIn = useSelector((state: AppState) => state.auth.authState);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!loggedIn) {
+      Router.push("/login");
+    }
+  }, [loggedIn]);
   return (
     <>
       <div className={styles.header + " base_padding"}>
-        <Logo/>
+        <Logo />
         <div
           className={`${styles.content_header} ${
             sidebarOpen ? "" : styles.none
@@ -28,6 +40,7 @@ const MainWrapper = ({ children }: { children: React.ReactNode }) => {
               setOpen={setSidebarItemOpen}
             />
           ))}
+          {loggedIn && <div onClick={() => dispatch(LogOut({}))}>Log out</div>}
           <div
             onClick={() => {
               setSidebarOpen(false);
