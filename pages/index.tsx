@@ -15,9 +15,12 @@ const Index = () => {
 
     // }, 300);
   }
-  useEffect(()=>{
-    getCards(search).then(({data})=> {setFilter(data.data); console.log(data)});
-  },[search])
+  useEffect(() => {
+    getCards(search).then(({ data }) => {
+      setFilter(data.data);
+      console.log(data);
+    });
+  }, [search]);
   return (
     <MainWrapper>
       <div style={{ flexDirection: "column" }}>

@@ -15,7 +15,7 @@ const Login = () => {
   function clickHandler() {
     setClick(true);
     // dispatch(LogIn({password, username}));\
-    dispatch(authentication({password, username}));
+    dispatch(authentication({ password, username }));
   }
   function handleChangeName(e: FormEvent<HTMLInputElement>) {
     setUsername(e.target.value);
