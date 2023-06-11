@@ -7,10 +7,9 @@ import { HEADER_ITEMS } from "../utils/constants";
 import HeaderItem from "./HeaderItem";
 import Logo from "./Logo";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../store/store";
-import Link from "next/link";
-import { LogOut } from "../store/authSlice";
+import { LogOut } from "../store/userReducer";
 import Router from "next/router";
+import { AppState } from "../store/store";
 
 const MainWrapper = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -40,7 +39,7 @@ const MainWrapper = ({ children }: { children: React.ReactNode }) => {
               setOpen={setSidebarItemOpen}
             />
           ))}
-          {loggedIn && <div onClick={() => dispatch(LogOut({}))}>Log out</div>}
+          {loggedIn && <div onClick={() => dispatch(LogOut())}>Log out</div>}
           <div
             onClick={() => {
               setSidebarOpen(false);
