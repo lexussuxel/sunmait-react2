@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [click, setClick] = useState(false);
   const loggedIn = useSelector((state: AppState) => state.auth.authState);
+  const authError = useSelector((state: AppState) => state.auth.error);
   const dispatch = useDispatch();
   function clickHandler() {
     setClick(true);
@@ -55,7 +56,7 @@ const Login = () => {
               type="password"
             />
           </div>
-          {click && (
+          {authError && (
             <div className="warning">Incorrect username or password!!!</div>
           )}
           <button onClick={clickHandler}>Submit</button>
