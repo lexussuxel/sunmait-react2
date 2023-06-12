@@ -3,18 +3,17 @@ import { LOGIN_MOCK } from "../utils/constants";
 export interface AuthState {
   authState: boolean;
   error: boolean;
-  
 }
 
 const initialState: AuthState = {
   authState: false,
-  error: false
+  error: false,
 };
 
 export enum AuthActions {
   LOG_IN,
   LOG_OUT,
-  UNAUTHORIZED
+  UNAUTHORIZED,
 }
 
 type ReducerAction = {
@@ -35,7 +34,7 @@ export const authReducer = (
     case AuthActions.LOG_OUT: {
       return { ...state, authState: false };
     }
-    case AuthActions.UNAUTHORIZED:{
+    case AuthActions.UNAUTHORIZED: {
       return { ...state, authState: false, error: true };
     }
     default:
@@ -45,4 +44,7 @@ export const authReducer = (
 
 export const LogIn = (payload: any) => ({ type: AuthActions.LOG_IN, payload });
 export const LogOut = () => ({ type: AuthActions.LOG_OUT, payload: {} });
-export const Unauthorized = () => ({type: AuthActions.UNAUTHORIZED, payload:{}})
+export const Unauthorized = () => ({
+  type: AuthActions.UNAUTHORIZED,
+  payload: {},
+});

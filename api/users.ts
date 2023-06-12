@@ -10,8 +10,9 @@ export function authentication({ password, username }) {
       })
       .then((data) => {
         dispatch(LogIn(data.data));
-      }).catch((e)=>{
-        dispatch(Unauthorized())
       })
+      .catch((e) => {
+        dispatch(Unauthorized());
+      });
   };
 }
