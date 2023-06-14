@@ -4,7 +4,7 @@ import { LogIn, Unauthorized } from "../store/userReducer";
 export function authentication({ password, username }) {
   return async (dispatch) => {
     await axios
-      .post("http://localhost:4200/user/auth", {
+      .post("http://localhost:4200/user/login", {
         password,
         username,
       })
