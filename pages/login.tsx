@@ -2,18 +2,21 @@ import { useEffect, useState, FormEvent } from "react";
 import MainWrapper from "../components/MainContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store/store";
-import { LogIn } from "../store/authSlice";
 import Router from "next/router";
+import { LogIn } from "../store/userReducer";
+import { authentication } from "../api/users";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [click, setClick] = useState(false);
   const loggedIn = useSelector((state: AppState) => state.auth.authState);
+  const authError = useSelector((state: AppState) => state.auth.error);
   const dispatch = useDispatch();
   function clickHandler() {
     setClick(true);
-    dispatch(LogIn({ username, password }));
+    // dispatch(LogIn({password, username}));\
+    dispatch(authentication({ password, username }));
   }
   function handleChangeName(e: FormEvent<HTMLInputElement>) {
     setUsername(e.target.value);
@@ -53,7 +56,7 @@ const Login = () => {
               type="password"
             />
           </div>
-          {click && (
+          {authError && (
             <div className="warning">Incorrect username or password!!!</div>
           )}
           <button onClick={clickHandler}>Submit</button>

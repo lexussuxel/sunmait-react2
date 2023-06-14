@@ -1,22 +1,17 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { authSlice } from "./authSlice";
-import { createWrapper } from "next-redux-wrapper";
+import {
+  applyMiddleware,
+  combineReducers,
+  legacy_createStore as createStore,
+} from "redux";
+import { authReducer, AuthState } from "./userReducer";
+import thunk from "redux-thunk";
 
-const makeStore = () =>
-  configureStore({
-    reducer: {
-      [authSlice.name]: authSlice.reducer,
-    },
-    devTools: true,
-  });
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
 
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action
->;
+export type AppState = {
+  auth: AuthState;
+};
 
-export const wrapper = createWrapper<AppStore>(makeStore);
+export const store = createStore(rootReducer, applyMiddleware(thunk));
