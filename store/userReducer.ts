@@ -1,4 +1,4 @@
-import { LOGIN_MOCK } from "../utils/constants";
+import jwt from "jwt-decode";
 
 export interface AuthState {
   authState: boolean;
@@ -27,11 +27,14 @@ export const authReducer = (
 ): AuthState => {
   switch (action.type) {
     case AuthActions.LOG_IN: {
+      const user = jwt(action.payload.access_token);
       if (action.payload) {
         return { ...state, authState: true, error: false };
       }
     }
     case AuthActions.LOG_OUT: {
+      delete localStorage["refresh_token"];
+      delete localStorage["access_token"];
       return { ...state, authState: false };
     }
     case AuthActions.UNAUTHORIZED: {

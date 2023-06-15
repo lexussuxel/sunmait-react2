@@ -3,32 +3,29 @@ import MainWrapper from "../components/MainContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store/store";
 import Router from "next/router";
-import { LogIn } from "../store/userReducer";
 import { authentication } from "../api/users";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [click, setClick] = useState(false);
   const loggedIn = useSelector((state: AppState) => state.auth.authState);
-  const authError = useSelector((state: AppState) => state.auth.error);
   const dispatch = useDispatch();
   function clickHandler() {
-    setClick(true);
     // dispatch(LogIn({password, username}));\
     dispatch(authentication({ password, username }));
   }
   function handleChangeName(e: FormEvent<HTMLInputElement>) {
     setUsername(e.target.value);
-    setClick(false);
+  }
+
+  function redirect() {
+    Router.push("/signup");
   }
   function handleChangPassword(e: FormEvent<HTMLInputElement>) {
     setPassword(e.target.value);
-    setClick(false);
   }
   useEffect(() => {
     if (loggedIn) {
-      setClick(false);
       Router.push("/");
     }
   }, [loggedIn]);
@@ -56,10 +53,9 @@ const Login = () => {
               type="password"
             />
           </div>
-          {authError && (
-            <div className="warning">Incorrect username or password!!!</div>
-          )}
+
           <button onClick={clickHandler}>Submit</button>
+          <button onClick={redirect}>Sign up</button>
         </div>
       </div>
     </MainWrapper>
