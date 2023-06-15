@@ -3,22 +3,26 @@ import Card from "../components/Card";
 import MainWrapper from "../components/MainContainer";
 import { CARDS, DESCRIPTION, TITLE } from "../utils/constants";
 import { getCards } from "../api/cards";
+import { useDispatch, useSelector } from "react-redux";
+import Router from "next/router";
+import { AppState } from "../store/store";
 
 const Index = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState(CARDS);
-  let timeout: NodeJS.Timeout;
+
+  const loggedIn = useSelector((state: AppState) => state.auth.authState);
+  useEffect(() => {
+    if (!loggedIn) {
+      Router.push("/login");
+    }
+  }, [loggedIn]);
   function inputHandler(e: FormEvent<HTMLInputElement>) {
     setSearch(e.target.value);
-    // clearTimeout(timeout);
-    // timeout = setTimeout(() => {
-
-    // }, 300);
   }
   useEffect(() => {
-    getCards(search).then(({ data }) => {
-      setFilter(data.data);
-      console.log(data);
+    getCards(search).then((data) => {
+      setFilter(data.data.data || []);
     });
   }, [search]);
   return (
@@ -38,7 +42,7 @@ const Index = () => {
           }}
         />
         <div className="items-wrapper">
-          {filter.map((card, i) => (
+          {filter?.map((card, i) => (
             <Card
               key={i}
               title={card.title}

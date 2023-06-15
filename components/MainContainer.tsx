@@ -18,7 +18,6 @@ const MainWrapper = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!loggedIn) {
-      Router.push("/login");
     }
   }, [loggedIn]);
   return (
